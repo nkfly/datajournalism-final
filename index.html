@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)http://datajournalism.ntu.edu.tw/post/89535832028 -->
+<html class="no-js" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+    <script src="./jquery.min.js"></script>
+
+
+
+
+
+    <!-- Basic Page Settings -->
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+
+
+    <!-- Li-Yuan Custom -->
+    <script>
+            var now_map = 0;
+            // var play_bar = new Image();
+            //     play_bar.src = "play_bar.png";
+            var labels;
+    </script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="./map.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <style>
+        svg{
+            margin: 10px auto;
+        }
+        path {
+            stroke:white;
+            fill: grey;
+            stroke-width:1px;
+            opacity:1.0;
+        }   
+        .tooltip{
+            display:none;
+            position:absolute;  
+            width:200px;
+            height:140px;
+            border-radius:10px;
+                box-shadow:4px 4px 10px rgba(0,0,0,0.4);
+            background:#DDD;
+        }
+        .button_list{
+            position:relative;
+            margin: 0px auto;   
+            height:50px;
+            width:800px;
+            text-align:center;
+            z-index:2;
+        }
+        .year_buttion{
+            margin: 0px auto;
+            width:155px;
+            height:50px;
+            display:inline-block;
+            background-color:orange;
+            font-size:35px;
+            color:white;
+            text-align:center;
+        }
+        .long_bar{
+            z-index:1;
+            margin: 0px auto;
+            position:relative;
+            top:45px;
+            height:20px;
+            width:600px;
+            display:block;
+            background-color:orange;
+        }
+        .bar_container{
+            height:30px;
+            width:400px;
+            position:relative;
+        }
+        .play_bar{
+                        z-index:1;
+                        margin: 0px auto;
+                        position:relative;
+            top:15px;
+                        height:5px;
+                        width:400px;
+                        display:block;
+                        background:#AAA;
+                }
+        .bar_container img{
+            position:relative;
+            z-index:3;
+        }
+        .axis path,
+        .axis line {
+            fill:none;  
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+        #article_container{
+            margin: 0px auto;
+            width:400px;
+            display:inline-block;
+            vertical-align:top;
+        }
+        .circle{
+            position:relative;
+            display:inline-block;
+            margin:0 auto;
+            margin-left:40px;
+            margin-right:40px;
+            width:70px;
+            height:70px;
+            border-radius:35px;
+            font-size:20px;
+            color:#FFF;
+            line-height:70px;
+            text-align:center;
+            background:#000;
+            z-index:3;
+            cursor:pointer;
+            -moz-user-select: none;  
+            -webkit-user-select: none;  
+            -ms-user-select: none; 
+
+        }
+    </style>
+    <style>
+    body {
+        font-family:Microsoft JhengHei;
+        font-size:18px;
+    }
+    .banner {
+        margin: 0px;
+        background-color: #55B2D6;
+        color: white;
+        text-align: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        font-size: 35px;
+    }
+    </style>
+
+    <!-- Li-Yuan Custom -->
+
+    <!-- Kun-Lun Custom -->
+    <script type='text/javascript' src="https://www.google.com/jsapi"></script>
+
+    <style type='text/css'>
+    span.tooltipCustom {
+        position: absolute;
+        width: 150px;
+        height: 80px;
+        line-height: 20px;
+        padding: 10px;
+        font-size: 14px;
+        text-align: left;
+        color: rgb(0, 0, 0);
+        background: rgb(156, 187, 183);
+        border: 4px solid rgb(156, 187, 183);
+        border-radius: 3px;
+        text-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 1px;
+        box-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 2px 0px;
+    }
+    span.tooltipCustom:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-width: 10px;
+        border-style: solid;
+        border-color: #9CBBB7 transparent transparent transparent;
+        top: 104px;
+        left: 80px;
+    }
+    </style>
+
+    <script type='text/javascript'>
+    //<![CDATA[
+
+    var theDataArray = [
+        ['ID', '', '', '', '', '四屆平均投票率', '四屆平均同額競選比例'],
+        ['楊梅鎮', -1.26, 0.9226, '185952-250152', 50, 62.4, 0.0774],
+        ['中壢市', -9.94, 0.8774, '314352-378552', 50, 53.7, 0.1126],
+        ['龍潭鄉', -2.04, 0.8061, '57552-121752', 50, 61.6, 0.1939],
+        ['桃園市', -18.46, 0.8232, '314352-378552', 50, 45.2, 0.1768],
+        ['大溪鎮', 3.14, 0.9241, '57552-121752', 50, 66.8, 0.0759],
+        ['蘆竹鄉', 1.05, 0.839, '57552-121752', 50, 64.7, 0.161],
+        ['大園鄉', 9.38, 0.8693, '57552-121752', 50, 73.0, 0.1307],
+        ['龜山鄉', -9.58, 0.9051, '121752-185952', 50, 54.0, 0.1149],
+        ['八德鄉', -5.54, 0.8333, '121752-185952', 50, 58.1, 0.1667],
+        ['平鎮鄉', -6.39, 0.8093, '185952-250152', 50, 57.2, 0.1907],
+        ['新屋鄉', 12.662, 0.881, '57552-121752', 50, 76.3, 0.119],
+        ['觀音鄉', 14.02, 0.8396, '57552-121752', 50, 77.6, 0.1604],
+        ['復興鄉', 12.98, 0.9853, '57552-121752', 50, 76.6, 0.0147]
+    ];
+
+    google.load("visualization", "1", {
+        packages: ["corechart"]
+    });
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+            var data = google.visualization.arrayToDataTable(theDataArray);
+
+            var options = {
+                title: '',
+                backgroundColor: 'transparent',
+                bubble: {
+                    opacity: 0.7
+                },
+                series: {
+                    '57552-121752': {
+                        color: '#BBB4AB'
+                    },
+                    '121752-185952': {
+                        color: '#F1D566'
+                    },
+                    '185952-250152': {
+                        color: '#F8B62C'
+                    },
+                    '250152-314352': {
+                        color: '#DA946B'
+                    },
+                    '314352-378552': {
+                        color: '#C79595'
+                    }
+                },
+                legend: {
+                    position: 'none'
+                },
+                hAxis: {
+                    title: '',
+                    maxValue: 25,
+                    minValue: -25,
+                    ticks: [{
+                        v: 0,
+                        f: ''
+                    }],
+                    textPosition: 'in'
+                },
+                vAxis: {
+                    title: '',
+                    baseline: 0.9,
+                    maxValue: 1.10,
+                    minValue: 0.70,
+                    ticks: [{
+                        v: 0.9,
+                        f: ''
+                    }],
+                    textPosition: 'in'
+                },
+                bubble: {
+                    textStyle: {
+                        fontSize: 11
+                    }
+                },
+                tooltip: {
+                    trigger: 'none'
+                }
+            };
+
+            var mouseX;
+            var mouseY;
+            $(document).mousemove(function(e) {
+                mouseX = e.pageX;
+                mouseY = e.pageY;
+            });
+
+            function handler1(e) {
+                var x = mouseX;
+                var y = mouseY-30;
+                var second = Math.round(parseFloat(theDataArray[e.row + 1][6]) * 10000) / 100;
+                if (!($('#custom_tooltip:visible').is(":visible"))) {
+                    $('#custom_tooltip').html('<span class="tooltipCustom">五屆投票率:<br />' + theDataArray[e.row + 1][5] + '%<br />五屆同額競選比率:<br />' + second.toString() + '%' + '</span>').css({
+                        'top': y - 110,
+                        'left': x - 90
+                    }).fadeIn('slow');
+                }
+            }
+
+            function handler2(e) {
+                $('#custom_tooltip').fadeOut('fast');
+            }
+
+            var chart = new google.visualization.BubbleChart(document.getElementById('chart_div'));
+            google.visualization.events.addListener(chart, 'onmouseover', handler1);
+            google.visualization.events.addListener(chart, 'onmouseout', handler2);
+            chart.draw(data, options);
+        }
+        //]]>
+    </script>
+    <!-- Kun-Lun Custom -->
+
+</head>
+
+
+
+<body style="padding:0px;border:0px;font-family:Microsoft JhengHei;font-size:18px">
+    <div class="container" style="width:100%;margin:0px;padding:0px;border:0px;position:relative;">
+        <div style="border:0px;padding:0px;margin:0px;position:relative;">
+            <h2 style="margin-bottom:0px;color:#F6D500;border:0px;font-size:48px;" class="banner">20年桃園村里長<br />鄉鎮市越大 政治越不熱衷</h2>
+            <h5 style="margin:0px;color:black;font-weight:bold;text-align:center;margin-top:0px;background-color:#55B2D6;padding:0px;padding-bottom:10px;border:0px;border-bottom:1px white solid;">
+               <span style="">記者 陳貞樺、蔣宜婷<br />製作 洪立遠、潘冠綸、吳旻誠</span>
+             </h5>
+            <h2 style="margin-bottom:0px;border:0px;" class="banner">城市越大 政治越冷感</h2>
+        </div>
+        <div id="custom_tooltip" style="position: absolute; z-index:1"></div>
+        <div sytle="width:100%;">
+            <div id="chart_with_overlay" style="position: relative; width: 100%; margin: 0 auto;">
+				<div style="width:100%; height:600px; background:#F2F2F2; margin: 0 auto; overflow: hidden">
+					<div id="chart_div" style="width: 120%; height: 830px; position: relative; top:-130px; left:-10%;"></div>
+					<div style="position: absolute; left:4%; top:285px; font-size: 14px;">選民很冷感</div>
+					<div style="position: absolute; left:91%; top:285px; font-size: 14px;">選民很熱衷</div>
+					<div style="position: absolute; left:46.5%; top:558px; font-size: 14px;">候選人躺著選</div>
+					<div style="position: absolute; left:46%; top:15px; font-size: 14px;">候選人競爭激烈</div>
+					<div style="position: absolute; left:5%; top:435px; font-size: 14px;"><strong>鄉鎮人口數（人）</strong>
+					</div>
+					<img src="./populationLegend2.png" width="150" height="134" style="position: absolute; left:4%; top:460px"></img>
+				</div>
+			</div>
+        </div>
+        <p style="font-size:18px;padding-left:20px;padding-right:20px;padding-bottom:30px;padding-top:30px;color:black;margin:0px;margin-bottom:10px;">
+            人口數越多的鄉鎮市，無論是選民的投票率，或是候選人的競爭程度都很低。人口最多的桃園市與中壢市選民冷感程度更為前兩名。<br />
+            相反的，人口數較少的鄉鎮市都在圖表右方，選民投票踴躍。而候選人競爭最激烈、選民投票情況最踴躍的，是桃園人口數第二低的復興鄉。
+        </p>
+        <h2 style="margin-bottom:0px;" class="banner">躺著選靠不靠黨？</h2>
+        <div style="text-align:center;">
+            <iframe style="width:33%" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1o5xVMxh3P_UjLUVgrOHQP9ZzML__oRMlQw9b59Apg8g/pubchart?oid=1678041403&amp;format=interactive"></iframe>
+            <iframe style="width:33%" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1o5xVMxh3P_UjLUVgrOHQP9ZzML__oRMlQw9b59Apg8g/pubchart?oid=1141999724&amp;format=interactive"></iframe>
+            <iframe style="width:33%" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1o5xVMxh3P_UjLUVgrOHQP9ZzML__oRMlQw9b59Apg8g/pubchart?oid=2105014005&amp;format=interactive"></iframe>
+        </div>
+        <div style="text-align:center;">
+            <iframe style="vertical-align:middle;"width="733" height="549" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1o5xVMxh3P_UjLUVgrOHQP9ZzML__oRMlQw9b59Apg8g/pubchart?oid=804179303&amp;format=interactive"></iframe>
+            <div style="width:300px;display:inline-block;text-align:left;padding-bottom:30px;position:relative;top:80px">
+                里長同額競選中，民國79年時為國民黨籍的比例高達67%，而近年逐年下降。另外，同額競選近年有回升的趨勢，或與2006年前總統陳水扁涉嫌貪污，民眾對於政治失落或冷感有關。<br />
+                <br />
+                不過！如果要可以躺著一直選一直選一直選，政黨背景仍是重要的因素！連續三屆都同額競選、沒有任何競爭者的里長，有75%都曾背過國民黨黨籍！
+            </div>
+        </div>
+        <h2 style="margin-bottom:0px;" class="banner">桃園市里長原多為國民黨籍，但漸漸被無黨籍取代</h2>
+        <div style="text-align:center;">
+            <svg id="svg1" ></svg>
+            <div class="article_container" style="text-align:left" id="article_container">
+                <p style="font-size:30px;">桃園市歷年村里長政黨變化圖</p>
+                <p style="text-align:left;">
+                    左圖為民國79年到99年桃園縣各鄉鎮的村里長政黨多數比例圖，以該地區當年村里長當選人的多數政黨為顯示顏色，藍色代表國民黨，綠色代表民進黨，灰色代表無黨籍。<br />
+                    <br />
+                    從圖中可看出，在里長選舉中，國民黨佔多數的情形已經漸漸消失。從民國79年的10個鄉鎮，到民國99年只剩下八德、中壢、龍潭三個鄉鎮，多數里長為國民黨籍。而其他政黨，例如民進黨與親民黨，則在桃園的里長選舉中表現不突出。整體來看，幾乎都是無黨籍與國民黨籍里長的天下。
+                </p>
+                <button id="play">Play</button>
+                <button id="turn_left"> &lt;</button>
+                <button id="turn_right"> &gt;</button>
+                <div class="bar_container" id="bar_container">
+                    <div class="play_bar" id="play_bar">
+                    </div>
+                </div>
+                <div style="width:460px;position:relative;padding-bottom:30px;"id="label_container">
+                </div>
+            </div>
+        </div>
+        <h2 style="margin-bottom:0px;" class="banner">桃園市長的黨籍，與里長的黨籍並無直接關係</h2>
+        <div style="text-align:center;">
+            <img style="margin-top:30px;"src="./events.png"></img><br />
+            <img style="vertical-align:top;display:inline-block"src="./投票率.png"></img>
+            <div style="width:28%;display:inline-block;text-align:left;padding-bottom:30px;margin-left:30px;padding-top:40px;">
+                桃園市歷年來幾乎都是國民黨主政，除了民國85年的劉邦友血案後，民進黨提名的呂秀蓮補選當上縣長外，民國90年後都是國民黨籍候選人當選。<br />
+                <br />
+                村里長的有效投票率在民國91年最高，但當年只有復興鄉跟八德鄉兩個鄉的里長多為國民黨籍，其餘鄉鎮則多數為無黨籍。到民國95年，里長為無黨籍的比例更高。<br />
+                <br />
+                可推知，多數里長的黨籍與桃園市長的選舉並無直接關係。
+            </div>
+        </div>
+        
+
+    
+        
+        <script>
+            labels = ["y79","y83","y87","y91","y95","y99"];
+            var width = 500;
+            var height = 450;
+            var svg = d3.select("#svg1")
+                        .attr("width", width)
+                        .attr("height", height);
+            var prj = d3.geo.mercator().center([121.679531, 24.798567]).scale(35000);
+            var path = d3.geo.path()
+                        .projection(prj);
+            
+            var g = svg.append("g");
+            d3.csv('village_party.csv',function(csv){
+                d3.json("tu.5.json", function(json) {
+                    bind_data(json,csv);
+                    calculate_color(json);
+                        var map = svg.selectAll("path")
+                        .data(json.features)
+                        .enter()
+                        .append("path")
+                        .attr("d",path)
+                        .style("fill",function(d){
+                            return d.properties.color[0];
+                        });
+                
+                    svg.selectAll("path")
+                        .on("mouseover",mouseover)
+                        .on("mouseout",mouseout);       
+                    
+                    set_onclick(svg);
+                    set_player(svg);
+                });
+            });
+        </script>
+        <div class="tooltip" id="tooltip1" style="z-index:1000;">
+            <table border="0">
+                 <caption id="tooltip_captain" style="text-align:center;font-size:20px;"></caption>
+                <tbody style="font-size:16px;"id="tooltip_table"></tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
