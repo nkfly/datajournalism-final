@@ -71,11 +71,11 @@ d3.csv('output.csv', function(data) {
   var xAxisOptions = ["消防車","救災車","消防勤務車","救護車輛","消防人力總計"]
   // var yAxisOptions = ["Well-being"];
   var descriptions = {
-    "消防車" : "GDP per person (US$)",
-    "救災車" : "Residential electricity use (kWh per year per person)",
-    "消防勤務車" : "Equality (based on GINI index) (0 = low equality, 100 = high equality)",
-    "救護車輛" : "Hourly pay per person (US$)",
-    "消防人力總計": "Food supply (kCal per day per person)",
+    "消防車" : "消防車",
+    "救災車" : "救災車",
+    "消防勤務車" : "消防勤務車",
+    "救護車輛" : "救護車輛",
+    "消防人力總計": "消防人力總計",
     "Family" : "Fertility (children per women)",
     "Alcohol consumption" : "Alcohol consumption (litres of pure alchohol per year per person)",
     "Working hours" : "Average working hours per week per person",
@@ -109,6 +109,7 @@ d3.csv('output.csv', function(data) {
       return d === xAxis;
     })
     .on('click', function(d) {
+      console.log('click');
       xAxis = d;
       updateChart();
       updateMenus();
@@ -150,7 +151,7 @@ d3.csv('output.csv', function(data) {
     .append('text')
     .attr('transform', 'translate(-60, 330)rotate(-90)')
     .attr({'id': 'yLabel', 'text-anchor': 'middle'})
-    .text('Well-being (scale of 0-10)');
+    .text('消防員因公傷亡');
 
   // Render points
   updateScales();
@@ -170,7 +171,7 @@ d3.csv('output.csv', function(data) {
     .style('cursor', 'pointer')
     .on('mouseover', function(d) {
       d3.select('svg g.chart #countryLabel')
-        .text(d.Country)
+        .text(d['時間地點'])
         .transition()
         .style('opacity', 1);
     })
