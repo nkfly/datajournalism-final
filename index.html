@@ -5,6 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="./jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>    
 
 
 
@@ -17,9 +18,119 @@
 
     <!-- Li-Yuan Custom -->
     <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script type="text/javascript" src="./map.js"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script>
     <style>
+        /* Document styling */
+body {
+  background-color: #eee;
+  font-family: helvetica, sans-serif;
+  font-weight: 100;
+}
+
+#wrapper {
+  width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+#chart {
+  position: absolute;
+  top: 30px;
+  left: 250px;
+  width: 900px;
+  /*margin: 25px auto;*/
+}
+
+#title {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  font-size: 16px;
+  letter-spacing: -2px;
+  line-height: 100%;
+}
+
+#about {
+  position: absolute;
+  top: 300px;
+  left: 30px;
+  width: 200px;
+  font-size: 12px;
+}
+
+#about .social {
+  margin-top: 5px;
+}
+
+#menu {
+  position: absolute;
+  top: 65px;
+  left: 30px;
+  width: 300px;
+}
+
+li, h1, h2 {
+  font-weight: 100;
+}
+
+h2 {
+  font-size: 11px;
+  margin: 0;
+  color: #666;
+}
+
+ul {
+  list-style: none;
+  font-size: 12px;
+  padding: 0;
+  margin-top: 3px;
+}
+
+li {
+  cursor: pointer;
+  padding-bottom: 5px;
+}
+
+li:hover {
+  color: #000;
+}
+
+li.preview {
+  font-weight: 400;
+}
+
+li.selected {
+  font-weight: bold;
+}
+
+/* SVG styling */
+path {
+    fill: #CED8B6;
+}
+
+line {
+    stroke: #555;
+    stroke-width: 2px;
+}
+
+line#bestfit {
+    stroke: #ddd;
+    stroke-width: 10px;
+}
+
+#xAxis path, #yAxis path, #xAxis line, #yAxis line {
+    stroke: #ccc;
+    fill: none;
+    shape-rendering: crispEdges;
+}
+
+text {
+    font-size: 12px;
+    fill: #888;
+}
+
+.twitter-share-button[style], .twitter-follow-button[style] { vertical-align: text-bottom !important; }
+.twitter-share-button {width: 76px !important;}
         svg{
             margin: 10px auto;
         }
@@ -141,32 +252,7 @@
     <script type='text/javascript' src="https://www.google.com/jsapi"></script>
 
     <style type='text/css'>
-    span.tooltipCustom {
-        position: absolute;
-        width: 150px;
-        height: 80px;
-        line-height: 20px;
-        padding: 10px;
-        font-size: 14px;
-        text-align: left;
-        color: rgb(0, 0, 0);
-        background: rgb(156, 187, 183);
-        border: 4px solid rgb(156, 187, 183);
-        border-radius: 3px;
-        text-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 1px;
-        box-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 2px 0px;
-    }
-    span.tooltipCustom:after {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 0;
-        border-width: 10px;
-        border-style: solid;
-        border-color: #9CBBB7 transparent transparent transparent;
-        top: 104px;
-        left: 80px;
-    }
+    
     </style>
 
     
@@ -188,6 +274,16 @@
         <h2 style="margin-bottom:0px;" class="banner">各年及六都緊急救護的數量增減</h2>
         <h2 style="margin-bottom:0px;" class="banner">火災</h2>
         <h2 style="margin-bottom:0px;" class="banner">消防員權益</h2>
+        <div id="authority-chart"></div>
+        <div id="menu">
+<!--                <h2>&uarr; Y axis</h2>
+                <ul id="y-axis-menu"></ul>
+                <h2>&rarr; X axis</h2>
+ -->                <ul id="x-axis-menu"><li class="selected">GDP</li><li>Equality</li><li>Food consumption</li><li>Alcohol consumption</li><li>Energy consumption</li><li>Family</li><li>Working hours</li><li>Work income</li><li>Health spending</li><li>Military spending</li></ul>
+            </div>
+
+        <script type="text/javascript" src="authority.js"></script>
+
         
     </div>
 </body>
