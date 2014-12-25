@@ -228,7 +228,7 @@ d3.csv('output.csv', function(data) {
         return isNaN(d[yAxis]) ? d3.select(this).attr('cy') : yScale(d[yAxis]);
       })
       .attr('r', function(d) {
-        return isNaN(d[xAxis]) || isNaN(d[yAxis]) ? 0 : 12;
+        return isNaN(d[xAxis]) || isNaN(d[yAxis]) ? 0 : 6;
       });
 
     // Also update the axes
