@@ -65,6 +65,8 @@ function getCorrelation(xArray, yArray) {
   return {r: r, m: m, b: b};
 }
 
+
+
 d3.csv('output.csv', function(data) {
 
   var xAxis = '消防人力總計', yAxis = '消防員因公傷亡';
@@ -123,7 +125,7 @@ d3.csv('output.csv', function(data) {
     .on('click', function(d) {
       console.log('click');
       xAxis = d;
-      updateChart();
+      updateChart("all");
       updateMenus();
     });
 
@@ -194,7 +196,7 @@ d3.csv('output.csv', function(data) {
         .style('opacity', 0);
     });
 
-  updateChart(true);
+  updateChart("all");
   updateMenus();
 
   // Render axes
@@ -210,10 +212,16 @@ d3.csv('output.csv', function(data) {
     .attr('transform', 'translate(-10, 0)')
     .call(makeYAxis);
 
+    $("#year").change(function(){
+          updateChart($(this).val());
+          console.log("fire");
+
+        });
+
 
 
   //// RENDERING FUNCTIONS
-  function updateChart(init) {
+  function updateChart(prefix) {
     updateScales();
 
     d3.select('svg g.chart')
@@ -229,7 +237,10 @@ d3.csv('output.csv', function(data) {
       })
       .attr('r', function(d) {
         return isNaN(d[xAxis]) || isNaN(d[yAxis]) ? 0 : 6;
-      });
+      }).style("visibility", function(d) {
+          if(prefix == "all" || d['時間地點'].indexOf(prefix) == 0)return "visible";
+          return "hidden";
+              });
 
     // Also update the axes
     d3.select('#xAxis')
@@ -245,8 +256,8 @@ d3.csv('output.csv', function(data) {
       .text(descriptions[xAxis]);
 
     // Update correlation
-    var xArray = _.map(data, function(d) {return d[xAxis];});
-    var yArray = _.map(data, function(d) {return d[yAxis];});
+    var xArray = _.map(data, function(d) {if(prefix == "all" || d['時間地點'].indexOf(prefix) == 0)return d[xAxis];});
+    var yArray = _.map(data, function(d) {if(prefix == "all" || d['時間地點'].indexOf(prefix) == 0)return d[yAxis];});
     var c = getCorrelation(xArray, yArray);
     var x1 = xScale.domain()[0], y1 = c.m * x1 + c.b;
     var x2 = xScale.domain()[1], y2 = c.m * x2 + c.b;
@@ -294,6 +305,8 @@ d3.csv('output.csv', function(data) {
         return d === yAxis;
     });
   }
+
+
 
 })
 

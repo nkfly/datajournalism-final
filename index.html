@@ -238,6 +238,17 @@ text {
         font-size: 35px;
     }
     </style>
+    <script>
+      $(document).ready(function(){
+        $("#year").change(function(){
+          updateChart($(this).val());
+          console.log("fire");
+
+        });
+        console.log("fire init")
+
+      });
+    </script>
 
     <!-- Li-Yuan Custom -->
 
@@ -247,6 +258,7 @@ text {
     <style type='text/css'>
     
     </style>
+
 
     
     <!-- Kun-Lun Custom -->
@@ -267,10 +279,24 @@ text {
         <h2 style="margin-bottom:0px;" class="banner">火災</h2>
         <h2 style="margin-bottom:0px;" class="banner">消防員權益</h2>
         <div id="authority-chart"></div>
+        年份選擇
+        <select id="year">
+          <option value="all">All</option>
+          <option value="94">94</option>
+          <option value="95">95</option>
+          <option value="96">96</option>
+          <option value="97">97</option>
+          <option value="98">98</option>
+          <option value="99">99</option>
+          <option value="100">100</option>
+          <option value="101">101</option>
+          <option value="102">102</option>
+        </select>
         <div id="menu">
               <ul id="x-axis-menu">                
               </ul>
             </div>
+
 
         <script type="text/javascript" src="authority.js"></script>
 
