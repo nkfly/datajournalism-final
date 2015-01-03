@@ -19,6 +19,20 @@
     <!-- Li-Yuan Custom -->
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="fire_final.js"></script>
+    <style>
+    .zoom{
+      background-color: #C9BC9C;
+    }
+    .tooltip{
+      display:none;
+      background-color:#f00;
+      position:absolute;
+      width:75px;
+      height:59px;
+      font-size:11px;
+    }
+  </style>
     <style>
         /* Document styling */
 body {
@@ -26,208 +40,6 @@ body {
   font-family: helvetica, sans-serif;
   font-weight: 100;
 }
-
-#wrapper {
-  width: 1200px;
-  margin: 0 auto;
-  position: relative;
-}
-
-#chart {
-  position: absolute;
-  top: 30px;
-  left: 250px;
-  width: 900px;
-  /*margin: 25px auto;*/
-}
-
-#title {
-  position: absolute;
-  top: 0;
-  left: 30px;
-  font-size: 18px;
-  letter-spacing: -2px;
-  line-height: 100%;
-}
-
-#about {
-  position: absolute;
-  top: 300px;
-  left: 30px;
-  width: 200px;
-  font-size: 12px;
-}
-
-#about .social {
-  margin-top: 5px;
-}
-
-li, h1, h2 {
-  font-weight: 100;
-}
-
-h2 {
-  font-size: 11px;
-  margin: 0;
-  color: #666;
-}
-
-ul {
-  list-style: none;
-  font-size: 18px;
-  padding: 0;
-  margin-top: 3px;
-}
-
-li {
-  cursor: pointer;
-  padding-bottom: 5px;
-}
-
-li:hover {
-  color: #000;
-}
-
-li.preview {
-  font-weight: 400;
-}
-
-li.selected {
-  font-weight: bold;
-}
-
-/* SVG styling */
-path {
-    fill: #CED8B6;
-}
-
-line {
-    stroke: #555;
-    stroke-width: 2px;
-}
-
-line#bestfit {
-    stroke: #ddd;
-    stroke-width: 10px;
-}
-
-#xAxis path, #yAxis path, #xAxis line, #yAxis line {
-    stroke: #ccc;
-    fill: none;
-    shape-rendering: crispEdges;
-}
-
-text {
-    font-size: 18px;
-    fill: #888;
-}
-
-.twitter-share-button[style], .twitter-follow-button[style] { vertical-align: text-bottom !important; }
-.twitter-share-button {width: 76px !important;}
-        svg{
-            margin: 10px auto;
-        }
-        path {
-            stroke:white;
-            fill: grey;
-            stroke-width:1px;
-            opacity:1.0;
-        }   
-        .tooltip{
-            display:none;
-            position:absolute;  
-            width:200px;
-            height:140px;
-            border-radius:10px;
-                box-shadow:4px 4px 10px rgba(0,0,0,0.4);
-            background:#DDD;
-        }
-        .button_list{
-            position:relative;
-            margin: 0px auto;   
-            height:50px;
-            width:800px;
-            text-align:center;
-            z-index:2;
-        }
-        .year_buttion{
-            margin: 0px auto;
-            width:155px;
-            height:50px;
-            display:inline-block;
-            background-color:orange;
-            font-size:35px;
-            color:white;
-            text-align:center;
-        }
-        .long_bar{
-            z-index:1;
-            margin: 0px auto;
-            position:relative;
-            top:45px;
-            height:20px;
-            width:600px;
-            display:block;
-            background-color:orange;
-        }
-        .bar_container{
-            height:30px;
-            width:400px;
-            position:relative;
-        }
-        .play_bar{
-                        z-index:1;
-                        margin: 0px auto;
-                        position:relative;
-            top:15px;
-                        height:5px;
-                        width:400px;
-                        display:block;
-                        background:#AAA;
-                }
-        .bar_container img{
-            position:relative;
-            z-index:3;
-        }
-        .axis path,
-        .axis line {
-            fill:none;  
-            stroke: #000;
-            shape-rendering: crispEdges;
-        }
-        #article_container{
-            margin: 0px auto;
-            width:400px;
-            display:inline-block;
-            vertical-align:top;
-        }
-        .circle{
-            position:relative;
-            display:inline-block;
-            margin:0 auto;
-            margin-left:40px;
-            margin-right:40px;
-            width:70px;
-            height:70px;
-            border-radius:35px;
-            font-size:20px;
-            color:#FFF;
-            line-height:70px;
-            text-align:center;
-            background:#000;
-            z-index:3;
-            cursor:pointer;
-            -moz-user-select: none;  
-            -webkit-user-select: none;  
-            -ms-user-select: none; 
-
-        }
-    </style>
-    <style>
-    body {
-        font-family:Microsoft JhengHei;
-        font-size:18px;
-    }
     .banner {
         margin: 0px;
         background-color: #55B2D6;
@@ -260,34 +72,35 @@ text {
 <body style="padding:0px;border:0px;font-family:Microsoft JhengHei;font-size:18px">
     <div class="container" style="width:100%;margin:0px;padding:0px;border:0px;position:relative;text-align:center">
         <div style="border:0px;padding:0px;margin:0px;position:relative;">
-            <h2 style="margin-bottom:0px;color:#F6D500;border:0px;font-size:48px;" class="banner">緊急救護資源</h2>
+            <h2 style="margin-bottom:0px;color:#F6D500;border:0px;font-size:48px;" class="banner">台灣縣市火災與消防員權益</h2>
             <h5 style="margin:0px;color:black;font-weight:bold;text-align:center;margin-top:0px;background-color:#55B2D6;padding:0px;padding-bottom:10px;border:0px;border-bottom:1px white solid;">
                <span style="">記者 陳貞樺、蔣宜婷<br />製作 洪立遠、潘冠綸、吳旻誠</span>
              </h5>
         </div>
 
         <h2 style="margin-bottom:0px;" class="banner">各縣市的救護資源是否充足</h2>
-        <h2 style="margin-bottom:0px;" class="banner">各年及六都緊急救護的數量增減</h2>
-        <h2 style="margin-bottom:0px;" class="banner">火災</h2>
-        <h2 style="margin-bottom:0px;" class="banner">消防員權益</h2>
-        <div id="authority-chart"></div>
-        年份選擇
-        <select id="year">
-          <option value="all">All</option>
-          <option value="94">94</option>
-          <option value="95">95</option>
-          <option value="96">96</option>
-          <option value="97">97</option>
-          <option value="98">98</option>
-          <option value="99">99</option>
-          <option value="100">100</option>
-          <option value="101">101</option>
-          <option value="102">102</option>
-        </select>
-        <div id="menu">
-              <ul id="x-axis-menu">                
-              </ul>
-            </div>
+
+        <div style="text-align:center;position:relative">
+          <div id="tooltip1" class="tooltip" >
+            <span id="year">95年</span><br>
+            <span id="die">死亡人數:17</span><br>
+            <span id="times">火災次數785</span><br>
+            <span id="hurt">受傷人數:112</span>
+          </div>
+          <svg id="svg1"></svg>
+        </div>
+        
+        <script>
+          d3.csv("fire_month2.csv",function(month_csv){
+            d3.csv("fire_die2.csv",function(die_csv){
+            d3.csv("fire_hurt2.csv",function(hurt_csv){
+              d3.json("twcounty2010.json",function(json){
+                draw_graph(month_csv,die_csv,hurt_csv,json);
+              })
+            })
+            })
+          });
+        </script>
 
 
         <script type="text/javascript" src="authority.js"></script>
