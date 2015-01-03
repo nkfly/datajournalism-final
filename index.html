@@ -22,6 +22,7 @@
     <script src="fire_final.js"></script>
     <script src="./snap.svg-min.js"></script>
     <script src="./prism.js"></script>
+    <script src="./jquery.burn.min.js"></script>
 
     <style>
     .zoom{
@@ -80,6 +81,9 @@ body {
         text-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 1px;
         box-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 2px 0px;
     }
+    .burning{
+  
+}
     </style>
 
 
@@ -91,7 +95,7 @@ body {
 <body style="padding:0px;border:0px;font-family:Microsoft JhengHei;font-size:20px">
     <div class="container" style="width:100%;margin:0px;padding:0px;border:0px;position:relative;text-align:center">
         <div style="border:0px;padding:0px;margin:0px;position:relative;">
-            <h2 style="margin-bottom:0px;color:#F6D500;border:0px;font-size:48px;" class="banner">台灣縣市火災與消防員權益</h2>
+            <h2 style="margin-bottom:0px;color:#F6D500;border:0px;font-size:48px;" class="banner burning">台灣縣市火災與消防員權益</h2>
             <h4 style="margin:0px;color:black;font-weight:bold;text-align:center;margin-top:0px;background-color:#F08080;padding:0px;padding-bottom:10px;border:0px;border-bottom:1px white solid;">
                <span style="">記者 陳貞樺、蔣宜婷<br />製作 洪立遠、潘冠綸、吳旻誠</span>
              </h4>
@@ -161,6 +165,7 @@ body {
         }
 
         $(document).ready(function () {
+           $('.burning').burn();
             var s = Snap("#svg");
             var yearText = ["100年", "101年", "102年"];
             var cityText = ["其他處置", "創傷處置", "呼吸道處置", "心肺復甦術", "藥物處置", "線上指導醫師"];
