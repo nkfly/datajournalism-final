@@ -35,6 +35,9 @@
       height:59px;
       font-size:11px;
     }
+    p {
+      text-align: left;
+    }
   </style>
     <style>
         /* Document styling */
@@ -45,7 +48,7 @@ body {
 }
     .banner {
         margin: 0px;
-        background-color: #55B2D6;
+        background-color: #F08080;
         color: white;
         text-align: center;
         padding-top: 20px;
@@ -85,11 +88,11 @@ body {
 
 </head>
 
-<body style="padding:0px;border:0px;font-family:Microsoft JhengHei;font-size:18px">
+<body style="padding:0px;border:0px;font-family:Microsoft JhengHei;font-size:20px">
     <div class="container" style="width:100%;margin:0px;padding:0px;border:0px;position:relative;text-align:center">
         <div style="border:0px;padding:0px;margin:0px;position:relative;">
             <h2 style="margin-bottom:0px;color:#F6D500;border:0px;font-size:48px;" class="banner">台灣縣市火災與消防員權益</h2>
-            <h4 style="margin:0px;color:black;font-weight:bold;text-align:center;margin-top:0px;background-color:#55B2D6;padding:0px;padding-bottom:10px;border:0px;border-bottom:1px white solid;">
+            <h4 style="margin:0px;color:black;font-weight:bold;text-align:center;margin-top:0px;background-color:#F08080;padding:0px;padding-bottom:10px;border:0px;border-bottom:1px white solid;">
                <span style="">記者 陳貞樺、蔣宜婷<br />製作 洪立遠、潘冠綸、吳旻誠</span>
              </h4>
         </div>
@@ -120,13 +123,13 @@ body {
           });
         </script>
         <h2 style="margin-bottom:0px;" class="banner">消防員權益<br /><span style="font-size:24px;">實際人力低於編制員額 消防人力長期不足</span></h2>
-        <p style="font-size:18px;padding-left:20px;padding-right:20px;padding-bottom:30px;padding-top:30px;color:black;margin:0px;margin-bottom:10px;">
+        <p style="font-size:20px;padding-left:20px;padding-right:20px;padding-bottom:30px;padding-top:30px;color:black;margin:0px;margin-bottom:10px;">
             依照內政部消防署規定，各縣市消防機關員額設置基準是根據其人口數及面積。每一消防機關預防及行政基本配置十二人，另依轄區人口數計算每滿十萬人增加十人。但根據消防署頒佈的消防年報，發現歷年消防員的實際人數都小於編制員額。平均全台灣的消防員差額(編制員額減掉實際人數)都在4000人上下，只有民國95年和99年降低到2800到2900人左右。
         </p>
         <iframe width="772" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1pLaSkcRd603LQ5PykZZs7lfC1jKHOf5DzPQ6afOcPtk/pubchart?oid=1819999762&amp;format=interactive"></iframe>
         <iframe style="padding-left:86px;padding-right:86px;background-color:white;"width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1pLaSkcRd603LQ5PykZZs7lfC1jKHOf5DzPQ6afOcPtk/pubchart?oid=304676614&amp;format=interactive"></iframe>
         <h2 style="margin-bottom:0px;" class="banner">新北市消防人力最不足 <br />台中市歷年平均救護量最高</h2>
-        <p style="font-size:18px;padding-left:20px;padding-right:20px;padding-bottom:30px;padding-top:30px;color:black;margin:0px;margin-bottom:10px;">
+        <p style="font-size:20px;padding-left:20px;padding-right:20px;padding-bottom:30px;padding-top:30px;color:black;margin:0px;margin-bottom:10px;">
             細看各縣市消防員不足的人數排名，以民國100年到102年為例，編制員額與實際人數差距最多的前3名分別是新北市、桃園縣以及台北市。
 值得注意的是台中市原本位居第4名，102年的消防員數量卻突然超越原本應配置的人數105人，；相反的，嘉義市原本的不足額人數都維持在個位數，民國102年卻增加到86人。綜觀來看，大部分縣市的不足額人數都是增加，顯示消防人力不足的問題全台皆有。
         </p>
@@ -157,7 +160,7 @@ body {
             $('#custom_tooltip').css({ 'visibility': 'hidden' });
         }
 
-        window.onload = function () {
+        $(document).ready(function () {
             var s = Snap("#svg");
             var yearText = ["100年", "101年", "102年"];
             var cityText = ["其他處置", "創傷處置", "呼吸道處置", "心肺復甦術", "藥物處置", "線上指導醫師"];
@@ -248,11 +251,144 @@ body {
                     this.attr({ opacity:0.35 });
                 });
             }
-        };
+        });
         </script>
-        <p style="font-size:18px;padding-left:20px;padding-right:20px;padding-bottom:30px;padding-top:30px;color:black;margin:0px;margin-bottom:10px;">
+        <p style="font-size:20px;padding-left:20px;padding-right:20px;padding-bottom:30px;padding-top:30px;color:black;margin:0px;margin-bottom:10px;">
             另外從各縣市歷年的救護量減消防員人數，來看消防員工作量。從民國95年到102年的數據來看，台中市的消防員平均救護量最多，一年最多可達106六件。消防員平均救護量前幾名的除了人口數較多的大城市外，也包含了彰化縣、宜蘭縣和花蓮縣。顯示除了大城市的消防員工作量較繁重外，都會和偏遠地區的消防員權益也需要被注意。
         </p>
+        <svg id="svg2" width="980" height="1000"></svg>
+        <div id="custom_tooltip2" style="position: absolute;visibility: hidden;"><span class="tooltipCustom">消防員平均分配救護量<br>(救護量/消防人員數):<br>70.13270142</span></div>
+        <script>
+        var tooltipCustomShow2 = false;
+        function tooltipCustomLoad2(e, diff) {
+            var x = mouseX;
+            var y = mouseY;
+            if (!($('#custom_tooltip2:visible').is(":visible"))) {
+                tooltipCustomShow2 = true;
+                $('#custom_tooltip2').html('<span class="tooltipCustom">消防員平均分配救護量<br />(救護量/消防人員數):<br />'+diff.toString()).css({
+                    'top': y,
+                    'left': x+15,
+                    'visibility': 'visible'
+                });
+            }
+        }
+        function tooltipCustomUnLoad2(e) {
+            $('#custom_tooltip2').css({ 'visibility': 'hidden' });
+        }
+
+        window.onload = function () {
+            var s2 = Snap("#svg2");
+            var yearText2 = ["95年","96年","97年","98年","99年","100年", "101年", "102年"];
+            var cityText2 = ["其他處置", "創傷處置", "呼吸道處置", "心肺復甦術", "藥物處置", "線上指導醫師"];
+            var yearCityRanking2 = [
+            ["花蓮縣","新北市","臺中市","宜蘭縣","臺南市","臺東縣","彰化縣","屏東縣","高雄市","新竹市","桃園縣","臺北市","基隆市","苗栗縣","雲林縣","嘉義市","嘉義縣","新竹縣","南投縣","金門縣","澎湖縣","連江縣","基隆港","高雄港","臺中港","花蓮港"],
+      ["新北市","臺中市","花蓮縣","宜蘭縣","臺南市","彰化縣","高雄市","屏東縣","新竹市","桃園縣","臺北市","臺東縣","苗栗縣","基隆市","雲林縣","嘉義市","南投縣","新竹縣","嘉義縣","金門縣","澎湖縣","連江縣","基隆港","高雄港","臺中港","花蓮港"],
+      ["新北市","臺中市","彰化縣","宜蘭縣","高雄市","臺南市","臺東縣","花蓮縣","新竹市","屏東縣","臺北市","桃園縣","苗栗縣","基隆市","雲林縣","嘉義市","南投縣","嘉義縣","新竹縣","金門縣","澎湖縣","連江縣","基隆港","高雄港","臺中港","花蓮港"],
+      ["臺中市","新北市","彰化縣","高雄市","宜蘭縣","臺南市","花蓮縣","臺北市","桃園縣","臺東縣","屏東縣","新竹市","雲林縣","基隆市","嘉義市","苗栗縣","嘉義縣","南投縣","新竹縣","金門縣","澎湖縣","基隆港","連江縣","高雄港","臺中港","花蓮港"],
+      ["臺中市","彰化縣","高雄市","宜蘭縣","臺南市","臺北市","花蓮縣","桃園縣","新北市","新竹市","雲林縣","屏東縣","嘉義市","基隆市","臺東縣","新竹縣","苗栗縣","嘉義縣","南投縣","金門縣","澎湖縣","連江縣","基隆港","高雄港","臺中港","花蓮港"],
+      ["臺中市","宜蘭縣","彰化縣","臺南市","高雄市","臺北市","花蓮縣","桃園縣","新北市","新竹市","雲林縣","屏東縣","嘉義市","基隆市","苗栗縣","南投縣","新竹縣","嘉義縣","臺東縣","金門縣","澎湖縣","基隆港","高雄港","連江縣","臺中港","花蓮港"],
+      ["臺中市","彰化縣","宜蘭縣","臺南市","高雄市","花蓮縣","臺北市","桃園縣","新北市","新竹市","雲林縣","屏東縣","基隆市","嘉義市","南投縣","苗栗縣","嘉義縣","新竹縣","臺東縣","金門縣","澎湖縣","高雄港","連江縣","基隆港","臺中港","花蓮港"],
+      ["宜蘭縣","彰化縣","臺中市","臺南市","高雄市","花蓮縣","臺北市","桃園縣","新北市","新竹市","雲林縣","屏東縣","基隆市","嘉義市","南投縣","苗栗縣","嘉義縣","新竹縣","臺東縣","金門縣","澎湖縣","基隆港","高雄港","連江縣","臺中港","花蓮港"]
+      ];
+            var yearAverageCases2 = [
+            [116.8724832,100.0443439,91.43780488,81.15555556,79.8600823,79.7615894,77.54186047,76.91768293,74.85974026,71.13567839,66.1953125,63.04245283,55.9119171,54.26956522,54.22392638,48.82828283,47.3125,47.10989011,46.48742138,22.91176471,20.31012658,6.208333333,5.833333333,5.571428571,3.242424242,1],
+      [98.50043141,88.58136925,84.66666667,81.04455446,78.34455959,77.65342163,77.49118388,70.78918919,70.13270142,64.32246799,63.7681638,63.67096774,59.15481172,55.565,53.6257485,49.40394089,47.44680851,45.35666667,44.40055249,21.98571429,21.2721519,6.24,6.146341463,4.774193548,3.235294118,0.735294118],
+      [91.08397535,88.85577943,85.29700855,80.60377358,78.62034739,76.90270936,73.31410256,70.65296804,69.18181818,67.41523342,66.13961039,64.7734104,58.70517928,57.17647059,56.43823529,51.90865385,46.06285714,45.54495913,44.3029316,25.54929577,21.6433121,5.72,5.625,4.532258065,4.088235294,0.764705882],
+      [92.04944501,88.55769231,85.6965812,82.34646962,82.02336449,80.03760282,75.12556054,73.54604833,68.38828633,66.7625,65.07949791,61.71232877,58.64488636,57.94907407,56.65550239,53.90625,48.57105263,47.06434316,46.88745981,30.91666667,23.50310559,6,5.75,4.516129032,3.558823529,0.852941177],
+      [103.7466281,92.86721992,90.72310127,89.60386473,84.81848929,80.15620999,79.02202643,78.27875648,73.90065557,71.5733945,64.01101928,62.7936803,61.58018868,60.72566372,58.89772727,54.47798742,53.17919075,52.28205128,51.74670185,32.64788732,24.68322981,7.703703704,6.642857143,5.770491803,3.242424242,0.545454546],
+      [106.8056829,97.84951456,97.51428571,88.95321001,84.36891892,83.52189781,81.34615385,81.23054187,77.89215214,74.03004292,69.76502732,64.2562724,63.64018692,61.79583333,58.36164384,57.53947368,56.05074627,55.94373402,49.02816901,34.88405797,26.70700637,5.902439024,5.629032258,4.84375,4.25,0.441176471],
+      [99.27264884,99.24643585,96.55607477,89.72582359,84.84926959,84.27876106,83.64307692,82.33170254,77.60325827,74.1441048,71.28337875,66.47217235,65.98717949,64.69668246,59.9973545,59.51902174,59.2689295,56.17559524,49.02797203,39.72857143,25.88607595,5.945454545,5.40625,4.976190476,3.111111111,0.444444444],
+      [100.1064815,98.87044534,97.70288625,93.42116631,84.62474781,84.12556054,84.06658212,82.421875,78.16015253,73.48660714,71.77807487,68.75547445,66.86266094,66.33980583,62.14480874,61.71186441,59.89153439,56.4421365,48.79298246,36.65753425,23.9125,6.658536585,5.918032787,5.741935484,3.2,0.411764706]
+      ];
+            var colorArray2 = ["#FFE5B7", "#E5E5E5", "#E3D2DB", "#E6EDF7", "#EDECE0", "#EBA087"];
+
+            var rectWidth2 = 120;
+            var rectWidthFirstSpacing2 = 30;
+            var rectHeight2 = 35;
+            var rectHeightFirstSpacing2 = 40;
+            var rectBorderWidth2 = 50;
+            var rectBorderHeight2 = 10;
+            var rectTrueWidht2 = rectWidth2-rectBorderWidth2;
+            var rectTrueHeight2 = rectHeight2-rectBorderHeight2;
+            var groupArray2 = [];
+            for(var i=0; i<yearText2.length; i++) {
+                var text2 = s2.text(45+rectWidth2*i, 20, yearText2[i]);
+                text2.attr({ "font-size": "20px" });
+
+                for(var j=0; j<yearCityRanking2[i].length; j++) {
+                    var actionText2 = yearCityRanking2[i];
+
+                    var firstIdx2 = yearCityRanking2[0].indexOf(actionText2[j]);
+                    var colorIdx2 = firstIdx2%colorArray2.length;
+
+                    var rect2 = s2.rect(rectWidthFirstSpacing2+rectWidth2*i, rectHeightFirstSpacing2+rectHeight2*j, rectTrueWidht2, rectTrueHeight2);
+                    rect2.attr({ fill: colorArray2[colorIdx2] });
+                    rect2.rankingTag = j;
+                    rect2.yearTag = i;
+                    rect2.mouseover(function(e){
+                        tooltipCustomLoad2(e, yearAverageCases2[this.yearTag][this.rankingTag]);
+                    }).mouseout(function(e){
+                        tooltipCustomUnLoad2(e);
+                    });
+
+                    var addSpacing2 = 4;
+                    var titleText2 = s2.text(rectWidthFirstSpacing2+rectWidth2*i+9+addSpacing2, rectHeightFirstSpacing2+rectHeight2*j+17, actionText2[j]);
+                    titleText2.rankingTag = j;
+                    titleText2.yearTag = i;
+                    titleText2.attr({ "font-size": "15px" }).mouseover(function(e){
+                        tooltipCustomLoad2(e, yearAverageCases2[this.yearTag][this.rankingTag]);
+                    }).mouseout(function(e){
+                        tooltipCustomUnLoad2(e);
+                    });;
+
+                    if(i!=0) {
+                        var lastIdx2 = yearCityRanking2[i-1].indexOf(actionText2[j]);
+                        if(lastIdx2 != j) {
+                            var diff2 = lastIdx2 - j;
+                            var line2 = s2.line(
+                                rectWidthFirstSpacing2+rectWidth2*i-rectBorderWidth2,
+                                rectHeightFirstSpacing2+rectHeight2*lastIdx2+rectTrueHeight2/2,
+                                rectWidthFirstSpacing2+rectWidth2*i,
+                                rectHeightFirstSpacing2+rectHeight2*j+rectTrueHeight2/2);
+                            line2.attr({ stroke: colorArray2[colorIdx2], strokeWidth:2 });
+
+                            groupArray2[firstIdx2].add(rect2, titleText2, line2);
+                        } else {
+                            var line2 = s2.line(
+                                rectWidthFirstSpacing2+rectWidth2*i-rectBorderWidth2,
+                                rectHeightFirstSpacing2+rectHeight2*j+rectTrueHeight2/2,
+                                rectWidthFirstSpacing2+rectWidth2*i,
+                                rectHeightFirstSpacing2+rectHeight2*j+rectTrueHeight2/2);
+                            line2.attr({ stroke: colorArray2[colorIdx2], strokeWidth:2 });
+
+                            groupArray2[firstIdx2].add(rect2, titleText2, line2);
+                        }
+                    } else {
+                        var g2 = s2.group(rect2, titleText2);
+                        groupArray2.push(g2);
+                    }
+                }
+            }
+
+            for(var i=0; i<groupArray2.length; i++) {
+                groupArray2[i].attr({ opacity:0.35 });
+
+                groupArray2[i].mouseover(function(e){
+                    this.attr({ opacity:1.0 });
+                }).mouseout(function(e){
+                    this.attr({ opacity:0.35 });
+                });
+            }
+        };
+        </script>
+        <h2 style="margin-bottom:0px;" class="banner">民國102年消防預算被大減 <br />101年補助費異常大增</h2>
+        <p style="font-size:20px;padding-left:20px;padding-right:20px;padding-bottom:30px;padding-top:30px;color:black;margin:0px;margin-bottom:10px;">
+            根據消防署消防年報的預算書，民國101年前的消防預算都是逐年增高，到101年但到民國102年卻減少了近一半的預算。101年的總預算為2,353,561,000元，102年卻大減為1,562,568,000元。<br/>
+再細看預算項目，發現與總預算曲線一致的是「獎補助費」。獎補助費主要是用來補助各縣市、團體、醫療慰問等。民國101年的獎補助費預算為802,295,000元，但隔年卻銳減為157,174,000元，足足少了645,121,000元。
+        </p>
+        <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1XJK6JXQlsfIQNzv-82Mbs4Nbpb_vIMo7K_562f_VRms/pubchart?oid=1912999396&amp;format=interactive"></iframe>
+        <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1XJK6JXQlsfIQNzv-82Mbs4Nbpb_vIMo7K_562f_VRms/pubchart?oid=554303898&amp;format=interactive"></iframe>
+        
         
         
         
