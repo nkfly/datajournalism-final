@@ -206,10 +206,15 @@ function mouseover(county_data,position){
 	var x = position[0];
 	var y = position[1]+120;
 	console.log("x="+x+";y="+y);
-	d3.select("#tooltip1")
-		.style("display","block")
-		.style("top",y)
-		.style("left",x);
+
+	// d3.select("#tooltip1")
+	// 	.style("display","block")
+	// 	.style("top",y)
+	// 	.style("left",x);
+		$("#tooltip1")
+		.css("top", y+"px")
+		.css("left", x+"px")
+		.show();
 	d3.select("#year")
 		.text(year);
 	d3.select("#die")

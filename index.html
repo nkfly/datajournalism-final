@@ -20,6 +20,9 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script>
     <script src="fire_final.js"></script>
+    <script src="./snap.svg-min.js"></script>
+    <script src="./prism.js"></script>
+
     <style>
     .zoom{
       background-color: #C9BC9C;
@@ -57,10 +60,23 @@ body {
     <!-- Li-Yuan Custom -->
 
     <!-- Kun-Lun Custom -->
-    <script type='text/javascript' src="https://www.google.com/jsapi"></script>
 
-    <style type='text/css'>
-    
+    <style type="text/css">
+    span.tooltipCustom {
+        position: absolute;
+        width: 140px;
+        height: 60px;
+        line-height: 20px;
+        padding: 10px;
+        font-size: 14px;
+        text-align: left;
+        color: rgb(0, 0, 0);
+        background: rgb(156, 187, 183);
+        border: 4px solid rgb(156, 187, 183);
+        border-radius: 3px;
+        text-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 1px;
+        box-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 2px 0px;
+    }
     </style>
 
 
@@ -73,14 +89,17 @@ body {
     <div class="container" style="width:100%;margin:0px;padding:0px;border:0px;position:relative;text-align:center">
         <div style="border:0px;padding:0px;margin:0px;position:relative;">
             <h2 style="margin-bottom:0px;color:#F6D500;border:0px;font-size:48px;" class="banner">台灣縣市火災與消防員權益</h2>
-            <h5 style="margin:0px;color:black;font-weight:bold;text-align:center;margin-top:0px;background-color:#55B2D6;padding:0px;padding-bottom:10px;border:0px;border-bottom:1px white solid;">
+            <h4 style="margin:0px;color:black;font-weight:bold;text-align:center;margin-top:0px;background-color:#55B2D6;padding:0px;padding-bottom:10px;border:0px;border-bottom:1px white solid;">
                <span style="">記者 陳貞樺、蔣宜婷<br />製作 洪立遠、潘冠綸、吳旻誠</span>
-             </h5>
+             </h4>
         </div>
-
-        <h2 style="margin-bottom:0px;" class="banner">各縣市的救護資源是否充足</h2>
-
-        <div style="text-align:center;position:relative">
+        <h2 style="margin-bottom:0px;" class="banner">台灣縣市火災地圖<br />
+        <span style="font-size:24px;">17年傷亡人數、事件頻率總體檢</span></h2>
+        <div style="width:820px;margin-left:auto;margin-right:auto;position:relative;font-size:13px;margin-top:30px;">
+          <div style="position:absolute;width:320px;height:140px;border:1px solid red">
+            <p>There's something here.
+            </p>
+          </div>
           <div id="tooltip1" class="tooltip" >
             <span id="year">95年</span><br>
             <span id="die">死亡人數:17</span><br>
@@ -89,7 +108,6 @@ body {
           </div>
           <svg id="svg1"></svg>
         </div>
-        
         <script>
           d3.csv("fire_month2.csv",function(month_csv){
             d3.csv("fire_die2.csv",function(die_csv){
@@ -101,10 +119,143 @@ body {
             })
           });
         </script>
+        <h2 style="margin-bottom:0px;" class="banner">消防員權益<br /><span style="font-size:24px;">實際人力低於編制員額 消防人力長期不足</span></h2>
+        <p style="font-size:18px;padding-left:20px;padding-right:20px;padding-bottom:30px;padding-top:30px;color:black;margin:0px;margin-bottom:10px;">
+            依照內政部消防署規定，各縣市消防機關員額設置基準是根據其人口數及面積。每一消防機關預防及行政基本配置十二人，另依轄區人口數計算每滿十萬人增加十人。但根據消防署頒佈的消防年報，發現歷年消防員的實際人數都小於編制員額。平均全台灣的消防員差額(編制員額減掉實際人數)都在4000人上下，只有民國95年和99年降低到2800到2900人左右。
+        </p>
+        <iframe width="772" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1pLaSkcRd603LQ5PykZZs7lfC1jKHOf5DzPQ6afOcPtk/pubchart?oid=1819999762&amp;format=interactive"></iframe>
+        <iframe style="padding-left:86px;padding-right:86px;background-color:white;"width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1pLaSkcRd603LQ5PykZZs7lfC1jKHOf5DzPQ6afOcPtk/pubchart?oid=304676614&amp;format=interactive"></iframe>
+        <h2 style="margin-bottom:0px;" class="banner">新北市消防人力最不足 <br />台中市歷年平均救護量最高</h2>
+        <p style="font-size:18px;padding-left:20px;padding-right:20px;padding-bottom:30px;padding-top:30px;color:black;margin:0px;margin-bottom:10px;">
+            細看各縣市消防員不足的人數排名，以民國100年到102年為例，編制員額與實際人數差距最多的前3名分別是新北市、桃園縣以及台北市。
+值得注意的是台中市原本位居第4名，102年的消防員數量卻突然超越原本應配置的人數105人，；相反的，嘉義市原本的不足額人數都維持在個位數，民國102年卻增加到86人。綜觀來看，大部分縣市的不足額人數都是增加，顯示消防人力不足的問題全台皆有。
+        </p>
+        <div style="margin-left:auto;margin-right:auto;">
+          <svg id="svg" width="480" height="1000"></svg>
+            <div id="custom_tooltip" style="visibility: hidden;position:absolute"><span class="tooltipCustom">消防員額差距<br>(編制員額-實際員額):<br>0</span></div>
+        </div>
+        <script>
+        var tooltipCustomShow = false;
+        $(document).mousemove(function(e) {
+            mouseX = e.pageX;
+            mouseY = e.pageY;
+        });
 
+        function tooltipCustomLoad(e, diff) {
+            var x = mouseX;
+            var y = mouseY;
+            if (!($('#custom_tooltip:visible').is(":visible"))) {
+                tooltipCustomShow = true;
+                $('#custom_tooltip').html('<span class="tooltipCustom">消防員額差距<br />(編制員額-實際員額):<br />'+diff.toString()).css({
+                    'top': y,
+                    'left': x+15,
+                    'visibility': 'visible'
+                });
+            }
+        }
+        function tooltipCustomUnLoad(e) {
+            $('#custom_tooltip').css({ 'visibility': 'hidden' });
+        }
 
-        <script type="text/javascript" src="authority.js"></script>
+        window.onload = function () {
+            var s = Snap("#svg");
+            var yearText = ["100年", "101年", "102年"];
+            var cityText = ["其他處置", "創傷處置", "呼吸道處置", "心肺復甦術", "藥物處置", "線上指導醫師"];
+            var yearCityRanking = [
+            ["新北市","桃園縣","台北市","台中市","台南市","彰化縣","苗栗縣","高雄市","新竹縣","澎湖縣","屏東縣","南投縣","台中港","基隆市","新竹市","嘉義縣","台東縣","花蓮港","基隆港","雲林縣","花蓮縣","宜蘭縣","金門縣","嘉義市","高雄港","連江縣","消防署"],
+            ["新北市","桃園縣","台北市","台中市","苗栗縣","台南市","彰化縣","高雄市","宜蘭縣","雲林縣","新竹縣","澎湖縣","花蓮縣","屏東縣","消防署","南投縣","嘉義縣","基隆市","新竹市","台東縣","基隆港","台中港","花蓮港","高雄港","嘉義市","金門縣","連江縣"],
+            ["新北市","桃園縣","台北市","苗栗縣","台南市","彰化縣","高雄市","宜蘭縣","雲林縣","嘉義市","新竹縣","屏東縣","花蓮縣","消防署","南投縣","澎湖縣","嘉義縣","新竹市","基隆市","台東縣","基隆港","台中港","花蓮港","高雄港","金門縣","連江縣","台中市"]];
+            var yearDiffPeople = [
+            [1423,673,419,381,301,257,204,134,83,57,52,40,32,29,29,28,26,25,23,21,17,14,7,6,2,0,-120],
+            [1413,666,438,313,293,279,256,108,106,94,82,56,55,53,51,42,36,35,33,24,22,19,14,9,9,6,0],
+            [1402,664,486,305,294,253,127,104,87,86,81,62,58,55,54,54,41,38,36,25,23,19,8,3,3,1,-105]];
+            var colorArray = ["#FFE5B7", "#E5E5E5", "#E3D2DB", "#E6EDF7", "#EDECE0", "#EBA087"];
 
+            var rectWidth = 160;
+            var rectWidthFirstSpacing = 30;
+            var rectHeight = 35;
+            var rectHeightFirstSpacing = 40;
+            var rectBorderWidth = 50;
+            var rectBorderHeight = 10;
+            var rectTrueWidht = rectWidth-rectBorderWidth;
+            var rectTrueHeight = rectHeight-rectBorderHeight;
+            var groupArray = [];
+            for(var i=0; i<yearText.length; i++) {
+                var text = s.text(58+rectWidth*i, 20, yearText[i]);
+                text.attr({ "font-size": "20px" });
+
+                for(var j=0; j<yearCityRanking[i].length; j++) {
+                    var actionText = yearCityRanking[i];
+
+                    var firstIdx = yearCityRanking[0].indexOf(actionText[j]);
+                    var colorIdx = firstIdx%colorArray.length;
+
+                    var rect = s.rect(rectWidthFirstSpacing+rectWidth*i, rectHeightFirstSpacing+rectHeight*j, rectTrueWidht, rectTrueHeight);
+                    rect.attr({ fill: colorArray[colorIdx] });
+                    rect.rankingTag = j;
+                    rect.yearTag = i;
+                    rect.mouseover(function(e){
+                        tooltipCustomLoad(e, yearDiffPeople[this.yearTag][this.rankingTag]);
+                    }).mouseout(function(e){
+                        tooltipCustomUnLoad(e);
+                    });
+
+                    var addSpacing = 6 - actionText[j].length;
+                    var titleText = s.text(rectWidthFirstSpacing+rectWidth*i+9+addSpacing*8, rectHeightFirstSpacing+rectHeight*j+17, actionText[j]);
+                    titleText.rankingTag = j;
+                    titleText.yearTag = i;
+                    titleText.attr({ "font-size": "15px" }).mouseover(function(e){
+                        tooltipCustomLoad(e, yearDiffPeople[this.yearTag][this.rankingTag]);
+                    }).mouseout(function(e){
+                        tooltipCustomUnLoad(e);
+                    });;
+
+                    if(i!=0) {
+                        var lastIdx = yearCityRanking[i-1].indexOf(actionText[j]);
+                        if(lastIdx != j) {
+                            var diff = lastIdx - j;
+                            var line = s.line(
+                                rectWidthFirstSpacing+rectWidth*i-rectBorderWidth,
+                                rectHeightFirstSpacing+rectHeight*lastIdx+rectTrueHeight/2,
+                                rectWidthFirstSpacing+rectWidth*i,
+                                rectHeightFirstSpacing+rectHeight*j+rectTrueHeight/2);
+                            line.attr({ stroke: colorArray[colorIdx], strokeWidth:2 });
+
+                            groupArray[firstIdx].add(rect, titleText, line);
+                        } else {
+                            var line = s.line(
+                                rectWidthFirstSpacing+rectWidth*i-rectBorderWidth,
+                                rectHeightFirstSpacing+rectHeight*j+rectTrueHeight/2,
+                                rectWidthFirstSpacing+rectWidth*i,
+                                rectHeightFirstSpacing+rectHeight*j+rectTrueHeight/2);
+                            line.attr({ stroke: colorArray[colorIdx], strokeWidth:2 });
+
+                            groupArray[firstIdx].add(rect, titleText, line);
+                        }
+                    } else {
+                        var g = s.group(rect, titleText);
+                        groupArray.push(g);
+                    }
+                }
+            }
+
+            for(var i=0; i<groupArray.length; i++) {
+                groupArray[i].attr({ opacity:0.35 });
+
+                groupArray[i].mouseover(function(e){
+                    this.attr({ opacity:1.0 });
+                }).mouseout(function(e){
+                    this.attr({ opacity:0.35 });
+                });
+            }
+        };
+        </script>
+        <p style="font-size:18px;padding-left:20px;padding-right:20px;padding-bottom:30px;padding-top:30px;color:black;margin:0px;margin-bottom:10px;">
+            另外從各縣市歷年的救護量減消防員人數，來看消防員工作量。從民國95年到102年的數據來看，台中市的消防員平均救護量最多，一年最多可達106六件。消防員平均救護量前幾名的除了人口數較多的大城市外，也包含了彰化縣、宜蘭縣和花蓮縣。顯示除了大城市的消防員工作量較繁重外，都會和偏遠地區的消防員權益也需要被注意。
+        </p>
+        
+        
+        
         
     </div>
 </body>
