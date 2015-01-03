@@ -280,8 +280,8 @@ function mouseover(county_data,position){
 	var y = position[1]+120;
 	d3.select("#tooltip1")
 		.style("display","block")
-		.style("top",y)
-		.style("left",x);
+		.style("top",y.toString()+"px")
+		.style("left",x.toString()+"px");
 	d3.select("#year")
 		.text(year);
 	d3.select("#die")
