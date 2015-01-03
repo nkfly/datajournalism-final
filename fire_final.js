@@ -8,6 +8,8 @@ function year_data(year,year_value){
 function county_data(name){
 	this.name = name;
 	this.year = [];
+	this.sum_of_die = 0;
+	this.sum_of_fire = 0;
 }
 
 function get_county(data){
@@ -80,6 +82,81 @@ function draw_graph(month_csv,die_csv,hurt_csv,json){
 		draw_rect(tmp,local_height/3,0,local_height/3,local_width-padding,county[i],year_list);
 		draw_reverse_poly(tmp,(local_height/3)*2,0,local_height/3,local_width-padding,county[i],xScale2);
 	}
+	//move_to(container_list[5],0,0);
+	var sorted_array = sort_calculation(county);
+	d3.select("#select1")
+		.on("change",function(){
+			var selectedIndex = d3.select("#select1").property('selectedIndex');
+			for(var i=0;i<sorted_array[selectedIndex].length;i++){
+                		for(var j=0;j<container_list.length;j++){
+                        		if(sorted_array[selectedIndex][i] == container_list[j].attr("id")){
+                                		move_to(container_list[j],Math.floor(i/5)*local_height,(i%5)*local_width+zoom_width);
+                        			break;
+					}
+                		}		
+        		}
+		});
+}
+function sort_by(container_list,sort_array){
+	for(var i=0;i<sort_array.length;i++){
+		for(var j=0;j<container_list.length;j++){
+			if(sort_array[i] == container_list[j].attr("id")){
+				move_to(container_list[j],Math.floor(i/5)*local_height,(i%5)*local_width+zoom_width);
+			}
+		}
+	}
+}
+function move_to(container,top_pos,left_pos){
+	container
+		.attr("x",left_pos)
+		.attr("y",top_pos);
+}
+function swap(array,i,j){
+	var tmp = array[i];
+	array[i] = array[j];
+	array[j] = tmp;
+}
+function sort_calculation(county_data){
+	var sort_die = [];
+	var sort_county = [];
+	var sort_fire = [];
+	var tmp_die = [];
+	var tmp_fire = [];
+	for(var i=0;i<county_data.length;i++){
+		sort_county.push(county_data[i].name);
+		sort_die.push(county_data[i].name);
+		tmp_die.push(county_data[i].sum_of_die);
+		//alert("fuck");
+		for(var j=sort_die.length-1;j>0;j--){
+			if(j == 0)
+				break
+			if(tmp_die[j]>tmp_die[j-1]){
+				swap(tmp_die,j,j-1);
+				swap(sort_die,j,j-1);
+			}
+			else
+				break;
+		}
+		sort_fire.push(county_data[i].name);
+                tmp_fire.push(county_data[i].sum_of_fire);
+                for(var j=sort_fire.length-1;j>0;j--){
+                        if(tmp_fire[j]>tmp_fire[j-1]){
+                                swap(tmp_fire,j,j-1);
+                                swap(sort_fire,j,j-1);
+                        }
+                        else
+                                break;
+                }
+	}
+	/*
+	d3.select("#select1")
+		.on("change",function(){
+			var selectedIndex = d3.select("#select1").property('selectedIndex');
+			alert(selectedIndex);
+		})
+	*/
+	//alert(sort_county);
+	return [sort_county,sort_fire,sort_die];
 }
 function append_background(svg,id,top_pos,left_pos,height,width,note_height){
 	var rect_size = 10;
@@ -169,10 +246,6 @@ function append_container(svg,id,top_pos,left_pos,height,width,zoom_change){
 		.attr("y",top_pos)
 		.attr("height",height)
 		.attr("width",width)
-		.attr("id",function(){
-			if(id == "zoom")
-				return "zoom";
-		})
 		.style("cursor",function(){
 			if(id != "zoom")
 				return "pointer";
@@ -205,16 +278,10 @@ function mouseover(county_data,position){
 	times = times.toString();
 	var x = position[0];
 	var y = position[1]+120;
-	console.log("x="+x+";y="+y);
-
-	// d3.select("#tooltip1")
-	// 	.style("display","block")
-	// 	.style("top",y)
-	// 	.style("left",x);
-		$("#tooltip1")
-		.css("top", y+"px")
-		.css("left", x+"px")
-		.show();
+	d3.select("#tooltip1")
+		.style("display","block")
+		.style("top",y)
+		.style("left",x);
 	d3.select("#year")
 		.text(year);
 	d3.select("#die")
@@ -507,6 +574,7 @@ function process_data(month_csv,die_csv,hurt_csv){
 			year_list.push(tmp[0].value);
                         for(var j=0;j<county.length;j++){
                                 county[j].year.push(new year_data(tmp[0].value,parseInt(tmp[j+1].value)));
+				county[j].sum_of_fire += parseInt(tmp[j+1].value);
                         }
                 }
                 else if(month_csv[i].month[month_csv[i].month.length-1] == "月"){
@@ -524,6 +592,7 @@ function process_data(month_csv,die_csv,hurt_csv){
 			for(var k=0;k<county.length;k++){
 				if(county[k].name == tmp[j].key){
 					county[k].year[i].die = parseInt(tmp[j].value);
+					county[k].sum_of_die += parseInt(tmp[j].value);
 					if(parseInt(tmp[j].value)>max){
 						max = parseInt(tmp[j].value);
 					}
@@ -559,4 +628,3 @@ function process_data(month_csv,die_csv,hurt_csv){
 	*/
 	return [county,year_list,max,max2];
 }
-
