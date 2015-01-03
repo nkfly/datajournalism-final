@@ -160,8 +160,8 @@ function append_container(svg,id,top_pos,left_pos,height,width,zoom_change){
 			.attr("x",left_pos)
                 	.attr("y",top_pos)
                 	.attr("height",height)
-                	.attr("width",width);
-			//.style("fill","white");
+                	.attr("width",width)
+			.style("fill","#C9BC9C");
 	}
 	var new_svg = svg.append("svg")
 		.attr("id",id)
