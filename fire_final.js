@@ -340,7 +340,7 @@ function generate_hurt_data(county_data){
 function draw_poly(svg,top_pos,left_pos,height,width,county_data,xScale,rev_scale){
 	var padding = 1;
 	var poly_data = generate_poly_data(county_data);
-	var scale_width = 30;
+	var scale_width = 35;
 	if(svg.attr("id") == "zoom"){
 		width -= scale_width*2;
 		left_pos += scale_width;
@@ -401,7 +401,7 @@ function draw_reverse_poly(svg,top_pos,left_pos,height,width,county_data,xScale)
         var padding = 1;
 	var text_height = 15;
 	height = height - text_height;
-	 var scale_width = 30;
+	 var scale_width = 35;
         if(svg.attr("id") == "zoom"){
                 width -= scale_width*2;
                 left_pos += scale_width;
@@ -501,7 +501,7 @@ function color_mapping(value){
 }
 function draw_rect(svg,top_pos,left_pos,height,width,county_data,year_list){
 	var rect_data = generate_rect_data(county_data);
-	var scale_width = 30;
+	var scale_width = 35;
         if(svg.attr("id") == "zoom"){
                 width -= scale_width*2;
                 left_pos += scale_width;
