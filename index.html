@@ -84,6 +84,201 @@ body {
     .burning{
   
 }
+    #wrapper {
+  width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+#chart {
+  position: absolute;
+  top: 30px;
+  left: 250px;
+  width: 900px;
+  /*margin: 25px auto;*/
+}
+
+#title {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  font-size: 18px;
+  letter-spacing: -2px;
+  line-height: 100%;
+}
+
+#about {
+  position: absolute;
+  top: 300px;
+  left: 30px;
+  width: 200px;
+  font-size: 12px;
+}
+
+#about .social {
+  margin-top: 5px;
+}
+
+li, h1, h2 {
+  font-weight: 100;
+}
+
+h2 {
+  font-size: 11px;
+  margin: 0;
+  color: #666;
+}
+
+ul {
+  list-style: none;
+  font-size: 18px;
+  padding: 0;
+  margin-top: 3px;
+}
+
+li {
+  cursor: pointer;
+  padding-bottom: 5px;
+}
+
+li:hover {
+  color: #000;
+}
+
+li.preview {
+  font-weight: 400;
+}
+
+li.selected {
+  font-weight: bold;
+}
+
+/* SVG styling */
+path {
+    fill: #CED8B6;
+}
+
+line {
+    stroke: #555;
+    stroke-width: 2px;
+}
+
+line#bestfit {
+    stroke: #ddd;
+    stroke-width: 10px;
+}
+
+#xAxis path, #yAxis path, #xAxis line, #yAxis line {
+    stroke: #ccc;
+    fill: none;
+    shape-rendering: crispEdges;
+}
+
+text {
+    font-size: 18px;
+    fill: #888;
+}
+
+.twitter-share-button[style], .twitter-follow-button[style] { vertical-align: text-bottom !important; }
+.twitter-share-button {width: 76px !important;}
+        svg{
+            margin: 10px auto;
+        }
+        path {
+            stroke:white;
+            fill: grey;
+            stroke-width:1px;
+            opacity:1.0;
+        }   
+        .tooltip{
+            display:none;
+            position:absolute;  
+            width:200px;
+            height:140px;
+            border-radius:10px;
+                box-shadow:4px 4px 10px rgba(0,0,0,0.4);
+            background:#DDD;
+        }
+        .button_list{
+            position:relative;
+            margin: 0px auto;   
+            height:50px;
+            width:800px;
+            text-align:center;
+            z-index:2;
+        }
+        .year_buttion{
+            margin: 0px auto;
+            width:155px;
+            height:50px;
+            display:inline-block;
+            background-color:orange;
+            font-size:35px;
+            color:white;
+            text-align:center;
+        }
+        .long_bar{
+            z-index:1;
+            margin: 0px auto;
+            position:relative;
+            top:45px;
+            height:20px;
+            width:600px;
+            display:block;
+            background-color:orange;
+        }
+        .bar_container{
+            height:30px;
+            width:400px;
+            position:relative;
+        }
+        .play_bar{
+                        z-index:1;
+                        margin: 0px auto;
+                        position:relative;
+            top:15px;
+                        height:5px;
+                        width:400px;
+                        display:block;
+                        background:#AAA;
+                }
+        .bar_container img{
+            position:relative;
+            z-index:3;
+        }
+        .axis path,
+        .axis line {
+            fill:none;  
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+        #article_container{
+            margin: 0px auto;
+            width:400px;
+            display:inline-block;
+            vertical-align:top;
+        }
+        .circle{
+            position:relative;
+            display:inline-block;
+            margin:0 auto;
+            margin-left:40px;
+            margin-right:40px;
+            width:70px;
+            height:70px;
+            border-radius:35px;
+            font-size:20px;
+            color:#FFF;
+            line-height:70px;
+            text-align:center;
+            background:#000;
+            z-index:3;
+            cursor:pointer;
+            -moz-user-select: none;  
+            -webkit-user-select: none;  
+            -ms-user-select: none; 
+
+        }
     </style>
 
 
@@ -95,53 +290,23 @@ body {
 <body style="padding:0px;border:0px;font-family:Microsoft JhengHei;font-size:20px">
     <div class="container" style="width:100%;margin:0px;padding:0px;border:0px;position:relative;text-align:center">
         <div style="border:0px;padding:0px;margin:0px;position:relative;">
-            <h2 style="margin-bottom:0px;color:#F6D500;border:0px;font-size:48px;" class="banner burning">台灣縣市火災與消防員權益</h2>
+            <h2 style="margin-bottom:0px;color:#F6D500;border:0px;font-size:48px;" class="banner burning">消防人力長期不足<br />實際人數低於編制員額</h2>
             <h4 style="margin:0px;color:black;font-weight:bold;text-align:center;margin-top:0px;background-color:#F08080;padding:0px;padding-bottom:10px;border:0px;border-bottom:1px white solid;">
                <span style="">記者 陳貞樺、蔣宜婷<br />製作 洪立遠、潘冠綸、吳旻誠</span>
              </h4>
         </div>
-        <h2 style="margin-bottom:0px;" class="banner">台灣縣市火災地圖<br />
-        <span style="font-size:24px;">17年傷亡人數、事件頻率總體檢</span></h2>
-        <div style="width:820px;margin-left:auto;margin-right:auto;position:relative;font-size:13px;margin-top:30px;">
-          <div style="position:absolute;width:320px;height:140px;border:1px solid red">
-            <p>There's something here.
-            </p>
-             <br>
-            <select id = "select1">
-                <option>地區性排列</option>
-                <option>累計發生火災次數由高至低</option>
-                <option>火災傷亡人數總和由高至低排列</option>
-                </select>
-          </div>
-          <div id="tooltip1" class="tooltip" >
-            <span id="year">95年</span><br>
-            <span id="die">死亡人數:17</span><br>
-            <span id="times">火災次數785</span><br>
-            <span id="hurt">受傷人數:112</span>
-          </div>
-          <svg id="svg1"></svg>
-        </div>
-        <script>
-          d3.csv("fire_month2.csv",function(month_csv){
-            d3.csv("fire_die2.csv",function(die_csv){
-            d3.csv("fire_hurt2.csv",function(hurt_csv){
-              d3.json("twcounty2010.json",function(json){
-                draw_graph(month_csv,die_csv,hurt_csv,json);
-              })
-            })
-            })
-          });
-        </script>
-        <h2 style="margin-bottom:0px;" class="banner">消防員權益<br /><span style="font-size:24px;">實際人力低於編制員額 消防人力長期不足</span></h2>
+        <h2 style="margin-bottom:0px;" class="banner">全台灣的消防員實際人數短少近4000人</h2>
         <p style="font-size:20px;padding-left:20px;padding-right:20px;padding-bottom:30px;padding-top:30px;color:black;margin:0px;margin-bottom:10px;">
-            依照內政部消防署規定，各縣市消防機關員額設置基準是根據其人口數及面積。每一消防機關預防及行政基本配置十二人，另依轄區人口數計算每滿十萬人增加十人。但根據消防署頒佈的消防年報，發現歷年消防員的實際人數都小於編制員額。平均全台灣的消防員差額(編制員額減掉實際人數)都在4000人上下，只有民國95年和99年降低到2800到2900人左右。
+            依照內政部消防署規定，各縣市消防機關員額設置基準是根據其人口數及面積。每一消防機關預防及行政基本配置十二人，另依轄區人口數計算每滿十萬人增加十人。<br /><br />但根據消防署頒佈的消防年報，發現歷年消防員的實際人數都小於編制員額。平均全台灣的消防員差額(編制員額減掉實際人數)都在4000人上下，只有民國95年和99年降低到2800到2900人左右。
         </p>
         <iframe width="772" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1pLaSkcRd603LQ5PykZZs7lfC1jKHOf5DzPQ6afOcPtk/pubchart?oid=1819999762&amp;format=interactive"></iframe>
         <iframe style="padding-left:86px;padding-right:86px;background-color:white;"width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1pLaSkcRd603LQ5PykZZs7lfC1jKHOf5DzPQ6afOcPtk/pubchart?oid=304676614&amp;format=interactive"></iframe>
         <h2 style="margin-bottom:0px;" class="banner">新北市消防人力最不足 <br />台中市歷年平均救護量最高</h2>
         <p style="font-size:20px;padding-left:20px;padding-right:20px;padding-bottom:30px;padding-top:30px;color:black;margin:0px;margin-bottom:10px;">
             細看各縣市消防員不足的人數排名，以民國100年到102年為例，編制員額與實際人數差距最多的前3名分別是新北市、桃園縣以及台北市。
-值得注意的是台中市原本位居第4名，102年的消防員數量卻突然超越原本應配置的人數105人，；相反的，嘉義市原本的不足額人數都維持在個位數，民國102年卻增加到86人。綜觀來看，大部分縣市的不足額人數都是增加，顯示消防人力不足的問題全台皆有。
+            <br /><br />
+
+值得注意的是，台中市原本位居第4名，102年的消防員數量卻突然超越原本應配置的人數105人；相反的，嘉義市原本的不足額人數都維持在個位數，民國102年卻增加到86人。綜觀來看，大部分縣市的不足額人數都是增加，顯示消防人力不足的問題全台皆有。
         </p>
         <div style="margin-left:auto;margin-right:auto;">
           <svg id="svg" width="480" height="1000"></svg>
@@ -398,12 +563,62 @@ body {
 再細看預算項目，發現與總預算曲線一致的是「獎補助費」。獎補助費主要是用來補助各縣市、團體、醫療慰問等。民國101年的獎補助費預算為802,295,000元，但隔年卻銳減為157,174,000元，足足少了645,121,000元。
         </p>
         <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1XJK6JXQlsfIQNzv-82Mbs4Nbpb_vIMo7K_562f_VRms/pubchart?oid=1912999396&amp;format=interactive"></iframe>
-        <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1XJK6JXQlsfIQNzv-82Mbs4Nbpb_vIMo7K_562f_VRms/pubchart?oid=554303898&amp;format=interactive"></iframe>
+        <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1XJK6JXQlsfIQNzv-82Mbs4Nbpb_vIMo7K_562f_VRms/pubchart?oid=554303898&amp;format=interactive"></iframe>                
+        <h2 style="margin-bottom:0px;" class="banner">台灣縣市火災地圖<br />
+        <span style="font-size:24px;">17年傷亡人數、事件頻率總體檢</span></h2>
+        <div style="width:820px;margin-left:auto;margin-right:auto;position:relative;font-size:13px;margin-top:30px;">
+          <div style="position:absolute;width:320px;height:140px;border:1px solid red">
+            <p>There's something here.
+            </p>
+             <br>
+            <select id = "select1">
+                <option>地區性排列</option>
+                <option>累計發生火災次數由高至低</option>
+                <option>火災傷亡人數總和由高至低排列</option>
+                </select>
+          </div>
+          <div id="tooltip1" class="tooltip" >
+            <span id="year">95年</span><br>
+            <span id="die">死亡人數:17</span><br>
+            <span id="times">火災次數785</span><br>
+            <span id="hurt">受傷人數:112</span>
+          </div>
+          <svg id="svg1"></svg>
+        </div>
+        <script>
+          d3.csv("fire_month2.csv",function(month_csv){
+            d3.csv("fire_die2.csv",function(die_csv){
+            d3.csv("fire_hurt2.csv",function(hurt_csv){
+              d3.json("twcounty2010.json",function(json){
+                draw_graph(month_csv,die_csv,hurt_csv,json);
+              })
+            })
+            })
+          });
+        </script>
+        <h2 style="margin-bottom:0px;" class="banner">17項變因 比對消防員因公傷亡數</h2>
+        <p style="font-size:20px;padding-left:20px;padding-right:20px;padding-bottom:30px;padding-top:30px;color:black;margin:0px;margin-bottom:10px;">
+            我們製作了歷年各縣市的消防員因公傷亡數，與各項可能變因的比對圖，但發現消防員死傷，與所有變因並無顯著關係。(請先選擇年分，在選擇下列變因，即會跑出當年的數據)
+        </p>
         
-        
-        
-        
-        
+        <span>年份選擇</span>
+        <select id="year2">
+          <option value="all">All</option>
+          <option value="94">94</option>
+          <option value="95">95</option>
+          <option value="96">96</option>
+          <option value="97">97</option>
+          <option value="98">98</option>
+          <option value="99">99</option>
+          <option value="100">100</option>
+          <option value="101">101</option>
+          <option value="102">102</option>
+        </select>
+        <span>變因選擇</span>
+        <select id="x-axis-menu">
+        </select>
+        <div id="authority-chart"></div>
+        <script type="text/javascript" src="authority.js"></script>
     </div>
 </body>
 

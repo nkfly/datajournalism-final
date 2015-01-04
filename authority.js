@@ -69,7 +69,7 @@ function getCorrelation(xArray, yArray) {
 
 d3.csv('output.csv', function(data) {
 
-  var xAxis = '消防人力總計', yAxis = '消防員因公傷亡';
+  var xAxis = '消防車', yAxis = '消防員因公傷亡';
   var xAxisOptions = ["消防車","救災車","消防勤務車","救護車輛","消防人力總計", "土地面積(平方公里)","人口數(人)", "消防車/土地面積(平方公里)","消防車/人口數(人)","救災車/土地面積(平方公里)","救災車/人口數(人)","消防勤務車/土地面積(平方公里)","消防勤務車/人口數(人)","救護車輛/土地面積(平方公里)","救護車輛/人口數(人)","消防人力總計/土地面積(平方公里)","消防人力總計/人口數(人)"];
   // var yAxisOptions = ["Well-being"];
   var descriptions = {
@@ -114,16 +114,16 @@ d3.csv('output.csv', function(data) {
 
   // Build menus
   d3.select('#x-axis-menu')
-    .selectAll('li')
+    .selectAll('option')
     .data(xAxisOptions)
     .enter()
-    .append('li')
+    .append('option')
     .text(function(d) {return d;})
     .classed('selected', function(d) {
       return d === xAxis;
     })
     .on('click', function(d) {
-      console.log('click');
+      console.log($(this).text());
       xAxis = d;
       updateChart("all");
       updateMenus();
@@ -212,7 +212,7 @@ d3.csv('output.csv', function(data) {
     .attr('transform', 'translate(-10, 0)')
     .call(makeYAxis);
 
-    $("#year").change(function(){
+    $("#year2").change(function(){
           updateChart($(this).val());
           console.log("fire");
 
@@ -295,7 +295,7 @@ d3.csv('output.csv', function(data) {
 
   function updateMenus() {
     d3.select('#x-axis-menu')
-      .selectAll('li')
+      .selectAll('option')
       .classed('selected', function(d) {
         return d === xAxis;
       });
