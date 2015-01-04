@@ -121,13 +121,18 @@ d3.csv('output.csv', function(data) {
     .text(function(d) {return d;})
     .classed('selected', function(d) {
       return d === xAxis;
-    })
-    .on('click', function(d) {
-      console.log($(this).text());
-      xAxis = d;
-      updateChart("all");
-      updateMenus();
     });
+    $('#x-axis-menu').on("change", function(d){
+      xAxis = $(this).val();
+      updateChart($("#year2").val());
+      updateMenus();
+    })
+    // .on('click', function(d) {
+    //   console.log($(this).text());
+    //   xAxis = d;
+    //   updateChart("all");
+    //   updateMenus();
+    // });
 
   // d3.select('#y-axis-menu')
   //   .selectAll('li')
@@ -214,8 +219,6 @@ d3.csv('output.csv', function(data) {
 
     $("#year2").change(function(){
           updateChart($(this).val());
-          console.log("fire");
-
         });
 
 
