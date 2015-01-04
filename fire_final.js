@@ -277,7 +277,7 @@ function mouseover(county_data,position){
 	}
 	times = times.toString();
 	var x = position[0];
-	var y = position[1]+120;
+	var y = position[1]+80;
 	d3.select("#tooltip1")
 		.style("display","block")
 		.style("top",y.toString()+"px")
