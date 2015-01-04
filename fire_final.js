@@ -47,7 +47,7 @@ function draw_graph(month_csv,die_csv,hurt_csv,json){
 	var zoom_width = (width/5)*2;
 	var zoom_padding = 20;
 	var zoom_border = 10;
-	var zoom_county = append_background(svg,"zoom_background",text_height,0,height-text_height,zoom_width-zoom_padding,graph_note_height);
+	var zoom_county = append_background(svg,"zoom_background",zoom_top,0,height-text_height,zoom_width-zoom_padding,graph_note_height);
 	var zoom = append_container(svg,"zoom",zoom_top,0+zoom_border,zoom_height,(zoom_width-zoom_padding-2*zoom_border));
 	local_width = (width-zoom_width)/5;
 	var zoomScale = d3.scale.linear();
