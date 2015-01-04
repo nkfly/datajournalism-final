@@ -40,7 +40,7 @@ function draw_graph(month_csv,die_csv,hurt_csv,json){
 	var xScale2 = d3.scale.linear();
         xScale2.domain([0,result[3]]).range([0,local_height/3]);
 	//////draw big graph
-	var zoom_height = height*(3/5);
+	var zoom_height = height*(1/2);
 	var text_height = 100;
 	var graph_note_height = 100;
 	var zoom_top = height-zoom_height-graph_note_height;
