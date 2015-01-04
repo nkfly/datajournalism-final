@@ -41,7 +41,7 @@ function draw_graph(month_csv,die_csv,hurt_csv,json){
         xScale2.domain([0,result[3]]).range([0,local_height/3]);
 	//////draw big graph
 	var zoom_height = height*(3/5);
-	var text_height = 150;
+	var text_height = height-zoom_height;
 	var graph_note_height = 100;
 	var zoom_top = height-zoom_height-graph_note_height;
 	var zoom_width = (width/5)*2;
