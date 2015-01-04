@@ -350,7 +350,7 @@ function draw_poly(svg,top_pos,left_pos,height,width,county_data,xScale,rev_scal
 			.ticks(3)
 			.orient("right");
 		svg.append("g")
-                        .style("font-size",9)
+                        .style("font-size","9px")
                         .attr("transform", "translate(" +axis_left+ "," + top_pos + ")")
                         .call(yAxis);
 	}
